@@ -1,0 +1,96 @@
+{% extends 'index.html' %}
+
+{% block body %}
+<div class="container tim-container">
+	<div class="tim-title">
+		<center>
+			<h1 class="header">Location of device: {{ device.name }}</h1>
+		</center>
+	</div>
+	<br>
+	<div class="container">
+		<div id="map" style="width:100%;height:400px">
+	</div>
+	<div class="space"></div>
+
+	<div class="tim-title">
+		<center>
+			<h1 class="header">Device: {{ device.name }}</h1>
+		</center>
+	</div>
+	<center><h4>PM Value</h4></center>
+	 <center><iframe id="frame" style="width: 50px; height: 40px;" src="https://{{ device.web_address }}"></iframe></center> 
+	<br>
+	<table class="table">
+		    <tbody>
+		      <tr>
+		      	<td>Device ID</td>
+		        <td>{{ device.id }}</td>
+		    </tr>
+		    <tr>
+		    	<td>Device Name</td>
+		        <td>{{ device.name }}</td>
+		    </tr>
+		    <tr>
+		    	<td>Device Address</td>
+		        <td>{{ device.address }}-{{ device.pin_code }}</td>
+		    </tr>
+		    <tr>
+		        <td>Longitude</td>
+		        <td>{{ device.longitude }}</td>
+		      </tr>
+		    <tr>
+		        <td>Latitude</td>
+		        <td>{{ device.latitude }}</td>
+		      </tr>
+		    </tbody>
+		  </table>
+</div>
+
+{% endblock %}
+
+{% block js %}
+	<script type="text/javascript">
+		function myMap() {
+		    var mapOptions = {
+		        center: new google.maps.LatLng(23.1788368,80.02604229999997),
+		        zoom: 5,
+		        mapTypeId: google.maps.MapTypeId.HYBRID
+		    }
+			var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+			var marker{{ device.id }} = new google.maps.Marker({
+						    position: new google.maps.LatLng(parseFloat({{ device.longitude }}),parseFloat({{ device.latitude }})),
+						    map: map,
+						    animation: google.maps.Animation.DROP,
+						    title: 'Device: {{ device.name }}'
+						  });
+			marker{{ device.id }}.setMap(map);
+		}
+
+		function getPM(){
+			// $.ajax({
+			// 	type: "get",
+			// 	url: "https://{{ device.web_address }}",
+			// 	success: function(data){
+			// 		console.log(data);
+			// 	},
+			// 	error: function(data){
+			// 		console.log("error", data);
+			// 	}
+			// });
+			// console.log("log");
+			var iframe = document.getElementById("frame");
+			iframe.src = iframe.src;
+			// var xhr = new XMLHttpRequest();	
+			// xhr.setRequestHeader('Access-Control-Allow-Origin','*');
+			// $.get("https://{{ device.web_address }}", function(data, status){
+		 //        alert("Data: " + data + "\nStatus: " + status);
+		 //    });
+		}
+
+
+		window.setInterval(getPM, 5000);
+
+	</script>
+	<script src="https://maps.googleapis.com/maps/api/js?callback=myMap"></script> 
+{% endblock %}

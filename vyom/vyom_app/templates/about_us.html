@@ -1,0 +1,41 @@
+{% extends "index.html" %}
+{% load static %}
+{% block body %}
+
+<div class="container tim-container">
+	<div class="tim-title">
+        <center><h2>Our Team</h2></center>
+    </div>
+
+    	<div class="row">
+                <center><h4>Team Leader</h4></center>
+                <center><img src='{% static "assets/img/sandeep.jpg" %}' style="width: 200px;" alt="Circle Image" class="img-circle"></center>
+                <center><h4>Sandeep Gupta</h4></center>
+        </div>
+        <br>
+		<div class="row">
+            <div class="col-md-6 col-sm-6">
+                <center><img src='{% static "assets/img/aditya.jpg" %}' style="width: 200px;" alt="Circle Image" class="img-circle"></center>
+                <center><h4>Aditya Dhawan</h4></center>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <center><img src='{% static "assets/img/abhignya.jpg" %}' style="width: 200px;" alt="Circle Image" class="img-circle"></center>
+               	<center><h4>Abhignya Ravuri</h4></center>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-md-6 col-sm-6">
+                
+                <center><img src='{% static "assets/img/rishi.jpg" %}' style="width: 200px;" alt="Circle Image" class="img-circle"></center>
+                <center><h4>Rishi Mishra</h4></center>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <center><img src='{% static "assets/img/pranjul.jpg" %}' style="width: 200px;" alt="Circle Image" class="img-circle"></center>
+               	<center><h4>Pranjul Shukla</h4></center>	
+            </div>
+        </div>
+</div>
+
+{% endblock %}
